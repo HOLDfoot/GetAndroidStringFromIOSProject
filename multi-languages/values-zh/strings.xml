@@ -1,0 +1,7 @@
+<resources>
+
+    <string name="message">消息</string>
+    <string name="report">举报</string>
+    <string name="reported">已举报</string>
+
+</resources>

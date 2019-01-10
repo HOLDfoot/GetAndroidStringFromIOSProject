@@ -1,0 +1,31 @@
+程序入口
+make_android_strings.py
+
+程序执行方法
+python make_android_strings.py
+
+程序配置变量
+cwd: 当前路径, 脚本工作路径
+android_input_folder = "multi-languages/android" #android输出目录
+origin_android_folder = "multi-languages/values-zh" #android输入目录, 因为输出目录可能会被清空, 所以另起一个android目录
+android_file_name = "strings.xml" #android资源文件名
+
+ios_input_folder = "multi-languages/ios" #ios的输入目录, 配置包括中文在内的多个语言
+origin_ios_folder = "zh-Hans.lproj" #ios中根据value找key的中文资源文件
+ios_file_name = "Localized.strings" #ios文件名
+ios_folder_suffix = ".lproj" #判断ios目录是否合法
+
+错误日志文件
+log.txt
+
+控制台信息:
+1. 开始执行获取android输入的文件 2. 查找结束打印的查找的字符串 3. 查找的结果(信息:是否有结果, 结果是否是1个)
+get_elements: /Users/zhumingren/PycharmProjects/GetAndroidStringFromIOSProject/multi-languages/values-zh/strings.xml
+find value: 选择图片
+find result: ['ASLocalizedLanguage_Tarot_Personal_ChamgeUserImage_ChoicePicture_String']
+
+查找单一语言的翻译:
+使用方法make_android_strings.test
+传入key和value multi-languages/android 目录会为该资源单独生成查找结果
+
+
