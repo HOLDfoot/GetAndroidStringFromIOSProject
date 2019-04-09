@@ -1,7 +1,10 @@
 <resources>
 
-    <string name="message">消息</string>
-    <string name="report">举报</string>
-    <string name="reported">已举报</string>
+   <!--塔罗模块-->
+    <string name="home_tor">塔罗占卜</string>
+    <string name="tarot_title">塔罗占卜</string>
+    <string name="taror_kind_shi">事业</string>
+    <string name="taror_kind_love">爱情</string>
+    <string name="taror_kind_money">财运</string>
 
 </resources>

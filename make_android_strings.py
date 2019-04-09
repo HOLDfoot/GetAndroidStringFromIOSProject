@@ -16,7 +16,7 @@ if sys.getdefaultencoding() != default_encoding:
 
 cwd = os.getcwd()
 
-DEBUG = False
+DEBUG = True
 
 android_input_folder = "multi-languages/android"
 origin_android_folder = "multi-languages/values-zh"
@@ -38,6 +38,7 @@ def main():
         pair_model = pair
         find_android_value(pair_model)
 
+# 从iOS的中文翻译中找到iOS对应的key, 正常则调用find_ios_value_by_key, 可能iOS中没有Android的翻译, 也可能有多个Android的翻译
 def find_android_value(pair_model):
     android_search_key = pair_model.key
     android_search_value = pair_model.value
@@ -46,10 +47,20 @@ def find_android_value(pair_model):
     log("find result: %s" % str(key_array))
     if key_array is None or len(key_array) == 0:
         log_file("Not find value", "value = %s\n" % android_search_value)
+        # 此时没有找到其他语言的翻译, 应该用默认的中文翻译占位置
+        # 将android默认的中文意思写到ios_lang_dir对应的android文件中
+        log("write chinese android_key: " + android_search_value)
+        for i in range(0, len(android_lang_dir)):
+            output_lang_file = os.path.join(cwd, android_input_folder, android_lang_dir[i], android_file_name)
+            if not os.path.exists(output_lang_file):
+                log("Not exists file error: " + output_lang_file)
+                return
+            # 读取文件, 然后插入
+            add_element(output_lang_file, android_search_key, android_search_value)
     elif len(key_array) > 1:
         key = "key = %s\n" % android_search_value
         keysLen = "keysLen = %d\n" % len(key_array)
-        body = key  + keysLen
+        body = key + keysLen
         log_file("Many keys", body)
         for key in key_array:
             find_ios_value_by_key(android_search_key, key)
@@ -98,7 +109,8 @@ def find_ios_value_by_key(android_key, ios_key):
             key_body = "ios_key = %s\n" % ios_key
             file_body = "target_lang_file = %s\n" % target_lang_file
             exists_body = "exists_lang = %s\n" % ios_lang_value
-            log_file("Key not exists in file", key_body + file_body + exists_body)
+            # 出现这种情况是iOS代码格式的问题, 找到相应的key调整格式, 重新调用脚本
+            log_file("Key not exists in file, please format the ios resources", key_body + file_body + exists_body)
             log(exists_body)
             return
         else:

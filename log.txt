@@ -1,0 +1,4 @@
+==========Not find value==========
+value = 塔罗占卜
+==========Not find value==========
+value = 塔罗占卜

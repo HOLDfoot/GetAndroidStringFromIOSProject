@@ -1,0 +1,7 @@
+<resources>
+<string name="home_tor">塔罗占卜</string>
+<string name="tarot_title">塔罗占卜</string>
+<string name="taror_kind_shi">Career</string>
+<string name="taror_kind_love">Love</string>
+<string name="taror_kind_money"> Fortune</string>
+</resources>
